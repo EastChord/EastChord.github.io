@@ -1,0 +1,8 @@
+baseURL = "https://EastChord.github.io/" # 1. Your future blog URL
+languageCode = "en-us" # 2. Set the language to English
+title = "EastChord's Blog" # 3. Your blog's title
+
+theme = "PaperMod"
+
+[params]
+  math = true # 4. Enable KaTeX for math formulas!
