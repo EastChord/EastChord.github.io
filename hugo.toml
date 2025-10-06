@@ -5,4 +5,4 @@ title = "EastChord's Blog" # 3. Your blog's title
 theme = "PaperMod"
 
 [params]
-  math = true # 4. Enable KaTeX for math formulas!
+  math = true # 4. Enable KaTeX for math formulas!theme = 'PaperMod'
