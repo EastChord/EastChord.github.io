@@ -4,14 +4,35 @@ title = "EastChord's Blog" # 3. Your blog's title
 
 theme = "PaperMod"
 
+[outputs]
+  home = ["HTML", "RSS", "JSON"] # 검색 기능을 위해 JSON 출력이 필요합니다.
+
 [params]
   defaultTheme = "auto"
   math = true # 4. Enable KaTeX for math formulas!theme = 'PaperMod'
-  showCategorites = true
+  showCategories = true
 
 [menu]
   [[menu.main]]
-    identifier = "gametheory"
+  identifier = "cryptography"
+  name = "Cryptography"
+  url = "/categories/cryptography/"
+  weight = 10
+
+  [[menu.main]]
+    identifier = "game-theory"
     name = "Game Theory"
-    url = "/gametheory"
-    weight = 10
+    url = "/categories/game-theory/"
+    weight = 20
+
+  [[menu.main]]
+    identifier = "about-me"
+    name = "About Me"
+    url = "/posts/my-first-post/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "search"
+    name = "Search" # 메뉴에 표시될 이름
+    url = "/search/"
+    weight = 100 # 다른 메뉴와의 순서 조정
