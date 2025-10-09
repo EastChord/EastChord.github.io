@@ -1,0 +1,44 @@
+---
+date: '2025-10-09'
+draft: false
+title: 'Regret Minimization'
+categories: ['Game Theory']
+---
+
+Regret minimization is a method to find optimal strategy in simultaneous games such as Rock-Paper-Scissors (RPS for short). We are going to explain what regret minimization is, especially the definition and how to use it, and we implement regret minimization through RPS game using Python.
+
+<!--more-->
+
+Note that I didn't use complex words in this post such as Nash Equilibrium, Extensive Form Game, and so on. In this post, I used more abstract words such as Optimal, modify, etc. because I consider that the reader is a beginner at game theory. If you want more mathematical, formal and detailed text, read this [document](https://www.ma.imperial.ac.uk/~dturaev/neller-lanctot.pdf).
+
+## What is Regret
+
+Let's play RPS betting money. We are both betting 1 dollar. If you win this game, then you can take all the money that we bet. Conversely, I can take all the money if I win. Suppose that you are rock and I am paper. You lost 1 dollar. If you play Paper instead of Rock, then you would not lose money. If you play Scissors, then you would even get money.
+
+**Regret** is defined as the gap between your payoff about your current action and your payoff about your other action. In the above situation, your payoff is $-1$ because you lose. But if you had been paper, this game would be a draw and your payoff would be $0$. So your regret is $0 - (-1) = 1$. If you had been scissors, you would win. So your payoff would be $1$ and the regret is $1 - (-1) = 2$.
+
+## What is Regret Minimization
+
+The question is: can you optimize your strategy by using this regret information? Let's think about the easiest way first. What if you will do the action that has the biggest regret? For example, you can take scissors in the above situation. Unfortunately, it doesn't work well. Because I can easily know what you will take and I also modify my strategy: taking rock. So, just tracking the regret is not a good strategy.
+
+Now we modify your strategy a little bit. What if you take rock, scissors, and paper probabilistically in proportion to regret? You will be able to take scissors with high probability, take paper with middle probability, and take rock with low probability. This is different from the first strategy. I will be able to take rock because I think you would take scissors, but I would be able to lose because you can take paper sometimes.
+
+In this strategy, we can compute the probability of each action by dividing the summations of regret. For example, we have $3$ total regret in the first RPS game. Because the regret of Paper action is $1$, we would play Paper in the next game with probability $1/3$. Similarly, we would play Scissors with probability $2/3$ because the regret of Scissors is $2$. Therefore, our next strategy is $(\textsf{rock, paper, scissors}) = (0, 1/3, 2/3)$.
+
+Using this strategy, suppose we are in the next game. Our RPS strategy is $(0, 1/3, 2/3)$ as we got before. In this game, suppose that you play scissors with $2/3$ probability and your opponent plays rock. We lose again. ~~I think the most optimal strategy is just to quit the game.~~ As before, we can compute the regret for each action. Your regret is $(1, 2, 0)$ for this game. Now we are going to modify our strategy by using regret.
+
+How to modify our strategy? We are going to *accumulate* current regret into the regret we have gotten up to now. We had regret $(0, 1, 2)$ before. We will be able to have accumulated regret $(1, 3, 2)$ by adding the current regret $(1, 2, 0)$ to each action respectively. Now we can generate a new strategy by using accumulated regret. That is $(1/6, 3/6, 2/6)$.
+
+By repeating this process a lot, a player **minimizes** expected regret. If the player reaches the minimum expected regret closely, then we can say this player's strategy is almost optimal. Note that Regret Minimization is an approximate method and this can't find the best strategy.
+
+## How to Implement Regret Minimization
+
+In this section, we are going to implement a simulation of RPS game with two players that use Regret Minimization. We will use Python3 language. If you want to see the whole code, come to [my GitHub repository](https://github.com/EastChord/Counterfactual-Regret-Minimization).
+
+If you run my RPS game simulations, then you can get an output that two players' strategy is approximately $(0.333, 0.333, 0.333)$. Theoretically, the best strategy in a general RPS game is to play anything with the same probability.
+
+## Summary and Future Post
+
+In this post, we learn what Regret Minimization is by using an RPS example. Regret is the difference between the payoff a player actually gets and the payoff a player could get if they acted differently. If a player minimizes this expected regret, then the player's strategy is near an optimal strategy. We can see the result of RPS game with two players using Regret Minimization and an optimal strategy in this game is to play with the same probability.
+
+This Regret Minimization method can be used in simultaneous games such as RPS game. It means that we can't use this method in sequential games such as Poker. Fortunately, we can use another similar method called Counterfactual Regret Minimization. And maybe my next post is about this. Thank you.
