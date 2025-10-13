@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
         <ul id="menu">
             <li>
-                <a href="http://localhost:1313/posts/my-first-post/" title="About Me">
+                <a href="http://localhost:1313/posts/about-me/" title="About Me">
                     <span>About Me</span>
                 </a>
             </li>
@@ -152,7 +152,9 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
   </header> 
   <div class="post-content"><p>Regret minimization is a method to find optimal strategy in simultaneous games such as Rock-Paper-Scissors (RPS for short). We are going to explain what regret minimization is, especially the definition and how to use it, and we implement regret minimization through RPS game using Python.</p>
-<p>Note that I didn&rsquo;t use complex words in this post such as Nash Equilibrium, Extensive Form Game, and so on. In this post, I used more abstract words such as Optimal, modify, etc. because I consider that the reader is a beginner at game theory. If you want more mathematical, formal and detailed text, read this <a href="https://www.ma.imperial.ac.uk/~dturaev/neller-lanctot.pdf">document</a>.</p>
+<p>Note that I didn&rsquo;t use complex words in this post such as Nash Equilibrium, Extensive Form Game, and so on. In this post, I used more abstract words such as Optimal, modify, etc. because I consider that the reader is a beginner at game theory. If you want more mathematical, formal and detailed text, read this <a href="https://www.ma.imperial.ac.uk/~dturaev/neller-lanctot.pdf" target="_blank" rel="noopener noreferrer">
+  document
+</a>.</p>
 <h2 id="what-is-regret">What is Regret<a hidden class="anchor" aria-hidden="true" href="#what-is-regret">#</a></h2>
 <p>Let&rsquo;s play RPS betting money. We are both betting 1 dollar. If you win this game, then you can take all the money that we bet. Conversely, I can take all the money if I win. Suppose that you are rock and I am paper. You lost 1 dollar. If you play Paper instead of Rock, then you would not lose money. If you play Scissors, then you would even get money.</p>
 <p><strong>Regret</strong> is defined as the gap between your payoff about your current action and your payoff about your other action. In the above situation, your payoff is $-1$ because you lose. But if you had been paper, this game would be a draw and your payoff would be $0$. So your regret is $0 - (-1) = 1$. If you had been scissors, you would win. So your payoff would be $1$ and the regret is $1 - (-1) = 2$.</p>
@@ -164,7 +166,9 @@ document.addEventListener("DOMContentLoaded", function() {
 <p>How to modify our strategy? We are going to <em>accumulate</em> current regret into the regret we have gotten up to now. We had regret $(0, 1, 2)$ before. We will be able to have accumulated regret $(1, 3, 2)$ by adding the current regret $(1, 2, 0)$ to each action respectively. Now we can generate a new strategy by using accumulated regret. That is $(1/6, 3/6, 2/6)$.</p>
 <p>By repeating this process a lot, a player <strong>minimizes</strong> expected regret. If the player reaches the minimum expected regret closely, then we can say this player&rsquo;s strategy is almost optimal. Note that Regret Minimization is an approximate method and this can&rsquo;t find the best strategy.</p>
 <h2 id="how-to-implement-regret-minimization">How to Implement Regret Minimization<a hidden class="anchor" aria-hidden="true" href="#how-to-implement-regret-minimization">#</a></h2>
-<p>In this section, we are going to implement a simulation of RPS game with two players that use Regret Minimization. We will use Python3 language. If you want to see the whole code, come to <a href="https://github.com/EastChord/Counterfactual-Regret-Minimization">my GitHub repository</a>.</p>
+<p>In this section, we are going to implement a simulation of RPS game with two players that use Regret Minimization. We will use Python3 language. If you want to see the whole code, come to <a href="https://github.com/EastChord/Counterfactual-Regret-Minimization" target="_blank" rel="noopener noreferrer">
+  my GitHub repository
+</a>.</p>
 <p>If you run my RPS game simulations, then you can get an output that two players&rsquo; strategy is approximately $(0.333, 0.333, 0.333)$. Theoretically, the best strategy in a general RPS game is to play anything with the same probability.</p>
 <h2 id="summary-and-future-post">Summary and Future Post<a hidden class="anchor" aria-hidden="true" href="#summary-and-future-post">#</a></h2>
 <p>In this post, we learn what Regret Minimization is by using an RPS example. Regret is the difference between the payoff a player actually gets and the payoff a player could get if they acted differently. If a player minimizes this expected regret, then the player&rsquo;s strategy is near an optimal strategy. We can see the result of RPS game with two players using Regret Minimization and an optimal strategy in this game is to play with the same probability.</p>

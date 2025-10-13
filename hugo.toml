@@ -12,27 +12,35 @@ theme = "PaperMod"
   math = true # 4. Enable KaTeX for math formulas!theme = 'PaperMod'
   showCategories = true
 
+[markup.goldmark.renderer]
+  unsafe = true # 이 설정이 있어야 HTML 속성을 직접 추가할 수 있습니다.
+
+[markup.goldmark.extensions]
+  [markup.goldmark.extensions.typographer]
+    leftAngleQuote = '&laquo;'
+    rightAngleQuote = '&raquo;'
+
 [menu]
   [[menu.main]]
-  identifier = "cryptography"
+  identifier = "menu-cryptography"
   name = "Cryptography"
   url = "/categories/cryptography/"
   weight = 10
 
   [[menu.main]]
-    identifier = "game-theory"
+    identifier = "menu-game-theory"
     name = "Game Theory"
     url = "/categories/game-theory/"
     weight = 20
 
   [[menu.main]]
-    identifier = "about-me"
+    identifier = "menu-about-me"
     name = "About Me"
-    url = "/posts/my-first-post/"
+    url = "/posts/about-me/"
     weight = 1
 
   [[menu.main]]
-    identifier = "search"
+    identifier = "menu-search"
     name = "Search" # 메뉴에 표시될 이름
     url = "/search/"
     weight = 100 # 다른 메뉴와의 순서 조정
